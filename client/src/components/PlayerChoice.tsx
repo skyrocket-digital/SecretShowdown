@@ -71,33 +71,51 @@ export default function PlayerChoice({
         {!isSelected && (
           <div>
             <p className="text-sm text-muted-foreground mb-4">Select your move:</p>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-5 gap-2">
               <Button 
                 variant="outline" 
-                className="flex flex-col items-center justify-center p-3 h-auto border-2 hover:bg-muted hover:scale-105 transition-all"
+                className="flex flex-col items-center justify-center p-2 h-auto border-2 hover:bg-muted hover:scale-105 transition-all"
                 onClick={() => handleChoiceClick("rock")}
                 disabled={disabled}
               >
-                <span className="material-icons text-3xl mb-1">back_hand</span>
-                <span className="text-sm">Rock</span>
+                <span className="material-icons text-2xl mb-1">back_hand</span>
+                <span className="text-xs">Rock</span>
               </Button>
               <Button 
                 variant="outline" 
-                className="flex flex-col items-center justify-center p-3 h-auto border-2 hover:bg-muted hover:scale-105 transition-all"
+                className="flex flex-col items-center justify-center p-2 h-auto border-2 hover:bg-muted hover:scale-105 transition-all"
                 onClick={() => handleChoiceClick("paper")}
                 disabled={disabled}
               >
-                <span className="material-icons text-3xl mb-1">front_hand</span>
-                <span className="text-sm">Paper</span>
+                <span className="material-icons text-2xl mb-1">front_hand</span>
+                <span className="text-xs">Paper</span>
               </Button>
               <Button 
                 variant="outline" 
-                className="flex flex-col items-center justify-center p-3 h-auto border-2 hover:bg-muted hover:scale-105 transition-all"
+                className="flex flex-col items-center justify-center p-2 h-auto border-2 hover:bg-muted hover:scale-105 transition-all"
                 onClick={() => handleChoiceClick("scissors")}
                 disabled={disabled}
               >
-                <span className="material-icons text-3xl mb-1">content_cut</span>
-                <span className="text-sm">Scissors</span>
+                <span className="material-icons text-2xl mb-1">content_cut</span>
+                <span className="text-xs">Scissors</span>
+              </Button>
+              <Button 
+                variant="outline" 
+                className="flex flex-col items-center justify-center p-2 h-auto border-2 hover:bg-muted hover:scale-105 transition-all"
+                onClick={() => handleChoiceClick("lizard")}
+                disabled={disabled}
+              >
+                <span className="material-icons text-2xl mb-1">pets</span>
+                <span className="text-xs">Lizard</span>
+              </Button>
+              <Button 
+                variant="outline" 
+                className="flex flex-col items-center justify-center p-2 h-auto border-2 hover:bg-muted hover:scale-105 transition-all"
+                onClick={() => handleChoiceClick("spock")}
+                disabled={disabled}
+              >
+                <span className="material-icons text-2xl mb-1">rocket</span>
+                <span className="text-xs">Spock</span>
               </Button>
             </div>
           </div>

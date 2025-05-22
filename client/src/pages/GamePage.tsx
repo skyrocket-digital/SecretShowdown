@@ -32,7 +32,7 @@ export default function GamePage() {
     <div className="container mx-auto px-4 py-8">
       <header className="text-center mb-8">
         <h1 className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-          Rock Paper Scissors
+          Rock Paper Scissors Lizard Spock
         </h1>
         <p className="text-muted-foreground text-lg">{getGameStatus()}</p>
       </header>

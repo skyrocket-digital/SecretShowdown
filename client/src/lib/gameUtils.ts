@@ -8,6 +8,10 @@ export function getChoiceIcon(choice: Choice | null): string {
       return "front_hand";
     case "scissors":
       return "content_cut";
+    case "lizard":
+      return "pets";
+    case "spock":
+      return "rocket";
     default:
       return "help";
   }
@@ -20,29 +24,45 @@ export function determineResult(player1Choice: Choice, player2Choice: Choice): R
   if (player1Choice === player2Choice) {
     winner = 'draw';
     message = "Both players selected the same move.";
-  } else if (
-    (player1Choice === "rock" && player2Choice === "scissors") ||
-    (player1Choice === "paper" && player2Choice === "rock") ||
-    (player1Choice === "scissors" && player2Choice === "paper")
-  ) {
-    winner = 'player1';
-    
-    if (player1Choice === "rock") {
-      message = "Rock crushes Scissors";
-    } else if (player1Choice === "paper") {
-      message = "Paper covers Rock";
-    } else {
-      message = "Scissors cuts Paper";
-    }
   } else {
-    winner = 'player2';
-    
-    if (player2Choice === "rock") {
-      message = "Rock crushes Scissors";
-    } else if (player2Choice === "paper") {
-      message = "Paper covers Rock";
+    // Define winning combinations
+    const winningCombinations: Record<Choice, Choice[]> = {
+      rock: ["scissors", "lizard"],
+      paper: ["rock", "spock"],
+      scissors: ["paper", "lizard"],
+      lizard: ["paper", "spock"],
+      spock: ["rock", "scissors"]
+    };
+
+    // Check if player1's choice beats player2's choice
+    if (winningCombinations[player1Choice].includes(player2Choice)) {
+      winner = 'player1';
+      // Generate appropriate message
+      if (player1Choice === "rock") {
+        message = player2Choice === "scissors" ? "Rock crushes Scissors" : "Rock crushes Lizard";
+      } else if (player1Choice === "paper") {
+        message = player2Choice === "rock" ? "Paper covers Rock" : "Paper disproves Spock";
+      } else if (player1Choice === "scissors") {
+        message = player2Choice === "paper" ? "Scissors cuts Paper" : "Scissors decapitates Lizard";
+      } else if (player1Choice === "lizard") {
+        message = player2Choice === "paper" ? "Lizard eats Paper" : "Lizard poisons Spock";
+      } else {
+        message = player2Choice === "rock" ? "Spock vaporizes Rock" : "Spock smashes Scissors";
+      }
     } else {
-      message = "Scissors cuts Paper";
+      winner = 'player2';
+      // Generate appropriate message for player2's win
+      if (player2Choice === "rock") {
+        message = player1Choice === "scissors" ? "Rock crushes Scissors" : "Rock crushes Lizard";
+      } else if (player2Choice === "paper") {
+        message = player1Choice === "rock" ? "Paper covers Rock" : "Paper disproves Spock";
+      } else if (player2Choice === "scissors") {
+        message = player1Choice === "paper" ? "Scissors cuts Paper" : "Scissors decapitates Lizard";
+      } else if (player2Choice === "lizard") {
+        message = player1Choice === "paper" ? "Lizard eats Paper" : "Lizard poisons Spock";
+      } else {
+        message = player1Choice === "rock" ? "Spock vaporizes Rock" : "Spock smashes Scissors";
+      }
     }
   }
 
