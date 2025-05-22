@@ -102,29 +102,42 @@ export function useGame() {
     });
   };
 
+  // Define the round result type
+  interface RoundResultResponse {
+    gameId: number;
+    roundNumber: number;
+    player1Choice: Choice;
+    player2Choice: Choice;
+    winner: 'player1' | 'player2' | 'draw';
+    player1Score: number;
+    player2Score: number;
+  }
+
   // Get round result
-  const { data: roundResult, refetch: refetchResult } = useQuery({
+  const { data: roundResult, refetch: refetchResult } = useQuery<RoundResultResponse>({
     queryKey: [`/api/games/${gameState.id}/rounds/${gameState.currentRound}/result`],
     enabled: pollingEnabled && gameState.status === "result",
-    refetchInterval: pollingEnabled ? 1000 : false,
-    onSuccess: (data) => {
-      if (data) {
-        setPollingEnabled(false);
-        setGameState(prev => ({
-          ...prev,
-          player1: {
-            ...prev.player1,
-            score: data.player1Score
-          },
-          player2: {
-            ...prev.player2,
-            score: data.player2Score
-          },
-          status: "result"
-        }));
-      }
-    }
+    refetchInterval: pollingEnabled ? 1000 : false
   });
+
+  // Update game state when round result changes
+  useEffect(() => {
+    if (roundResult) {
+      setPollingEnabled(false);
+      setGameState(prev => ({
+        ...prev,
+        player1: {
+          ...prev.player1,
+          score: roundResult.player1Score
+        },
+        player2: {
+          ...prev.player2,
+          score: roundResult.player2Score
+        },
+        status: "result"
+      }));
+    }
+  }, [roundResult]);
 
   // Start next round
   const nextRoundMutation = useMutation({

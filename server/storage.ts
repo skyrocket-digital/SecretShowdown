@@ -194,10 +194,16 @@ export class MemStorage implements IStorage {
         (round.player1Choice === "scissors" && round.player2Choice === "paper")
       ) {
         round.winner = "player1";
-        await this.updateGameScore(gameId, game.player1Score + 1, game.player2Score);
+        // Increment player1's score
+        game.player1Score += 1;
+        await this.updateGameScore(gameId, game.player1Score, game.player2Score);
+        console.log(`Player 1 wins! Updated scores: ${game.player1Score}-${game.player2Score}`);
       } else {
         round.winner = "player2";
-        await this.updateGameScore(gameId, game.player1Score, game.player2Score + 1);
+        // Increment player2's score
+        game.player2Score += 1;
+        await this.updateGameScore(gameId, game.player1Score, game.player2Score);
+        console.log(`Player 2 wins! Updated scores: ${game.player1Score}-${game.player2Score}`);
       }
     }
     

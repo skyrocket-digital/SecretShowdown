@@ -47,7 +47,7 @@ export const insertRoundSchema = createInsertSchema(gameRounds).pick({
 });
 
 // Choice schema
-export const choiceSchema = z.enum(["rock", "paper", "scissors"]);
+export const choiceSchema = z.enum(["rock", "paper", "scissors", "lizard", "spock"]);
 
 // Player choice schema
 export const playerChoiceSchema = z.object({
